@@ -1232,7 +1232,7 @@
             <span class="welcome-pill accent">Easy Booking</span>
         </div>
         <div class="welcome-track"></div>
-        <p class="welcome-continue">✈️ Press ENTER to continue</p>
+        <p class="welcome-continue">Tap anywhere or press ENTER to continue</p>
     </div>
 </div>
 
@@ -1390,7 +1390,46 @@ function updateHeaderOnScroll() {
     if (!header) return;
     header.classList.toggle('scrolled', window.scrollY > 20);
 }
-function showWelcomePopup() { const popup = document.getElementById('welcomePopup'); if(!popup) return; popup.classList.add('active'); const handleEnter = (e) => { if(e.key === 'Enter' && popup.classList.contains('active')) { e.preventDefault(); document.removeEventListener('keydown', handleEnter); triggerDeparture(); } }; document.addEventListener('keydown', handleEnter); } function triggerDeparture() { const popup = document.getElementById('welcomePopup'); popup.querySelector('.modal-content')?.classList.add('welcome-fade-out'); setTimeout(() => { popup.classList.remove('active'); document.getElementById('homeContent').style.display = 'block'; document.getElementById('aboutContent').classList.remove('active'); window.scrollTo({top:0,behavior:'smooth'}); }, 300); }
+function showWelcomePopup() {
+    const popup = document.getElementById('welcomePopup');
+    if (!popup) return;
+
+    popup.classList.add('active');
+
+    let isClosed = false;
+    const closePopup = () => {
+        if (isClosed || !popup.classList.contains('active')) return;
+        isClosed = true;
+        popup.removeEventListener('click', handleTap);
+        document.removeEventListener('keydown', handleKeydown);
+        triggerDeparture();
+    };
+
+    const handleTap = () => {
+        closePopup();
+    };
+
+    const handleKeydown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            closePopup();
+        }
+    };
+
+    popup.addEventListener('click', handleTap);
+    document.addEventListener('keydown', handleKeydown);
+}
+
+function triggerDeparture() {
+    const popup = document.getElementById('welcomePopup');
+    popup.querySelector('.modal-content')?.classList.add('welcome-fade-out');
+    setTimeout(() => {
+        popup.classList.remove('active');
+        document.getElementById('homeContent').style.display = 'block';
+        document.getElementById('aboutContent').classList.remove('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 300);
+}
 function updateAuthWidget() { const w = document.getElementById('authWidget'); if(w && !w.querySelector('.header-cta')) w.innerHTML = `<a class="btn-primary header-cta" href="#contact">Let's Talk</a>`; }
 function loadUser() { try { const u = sessionStorage.getItem('kmmsession'); currentUser = u ? JSON.parse(u) : null; } catch(e) { currentUser = null; } }
 function saveUser(u) { localStorage.setItem('kmmuser', JSON.stringify(u)); }

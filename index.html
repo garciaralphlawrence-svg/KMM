@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>KMM Travel Co. | Know Me More - Premium Philippines Destinations</title>
+<link rel="icon" type="image/png" href="loho.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -675,6 +676,7 @@
         background: linear-gradient(135deg, var(--green-1), var(--green-2));
         color: white;
         font-weight: 600;
+        font-family: 'Montserrat', sans-serif;
         cursor: pointer;
         box-shadow: 0 14px 26px rgba(94,148,120,0.16);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -837,10 +839,28 @@
         .footer-col a { color: #eef5f1; text-decoration: none; transition: color 0.2s; }
         .footer-col a:hover { color: #f0d39a; }
         .copyright { text-align: center; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.14); margin-top: 50px; font-size: 0.75rem; letter-spacing: 1px; font-weight: 300; }
-        .toast-msg { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #345d4b; color: white; padding: 12px 28px; border-radius: 50px; font-size: 0.8rem; font-weight: 500; opacity: 0; transition: all 0.3s ease; z-index: 1100; white-space: nowrap; font-family: 'Montserrat', sans-serif; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .toast-msg { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #345d4b; color: white; padding: 12px 28px; border-radius: 50px; font-size: 0.8rem; font-weight: 500; opacity: 0; transition: all 0.3s ease; z-index: 1100; white-space: normal; text-align: center; width: max-content; max-width: min(90vw, 620px); line-height: 1.5; font-family: 'Montserrat', sans-serif; box-shadow: 0 8px 20px rgba(0,0,0,0.15); pointer-events: none; }
         .toast-msg.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         
+        /* Anchor targets clear the sticky header */
+        #letsTalk, #packages, #contact, .featured-destinations { scroll-margin-top: 170px; }
+        nav ul li a.active::after { width: 100%; }
+        .chip-option:has(input:checked) { background: rgba(94,148,120,0.12); border-color: var(--green-2); }
+        .form-success { display: none; margin-top: 18px; padding: 18px 20px; border-radius: 22px; background: linear-gradient(135deg, rgba(94,148,120,0.12), rgba(215,180,107,0.10)); border: 1px solid rgba(94,148,120,0.24); color: var(--text-main); font-size: 0.88rem; line-height: 1.7; }
+        .form-success.show { display: block; animation: fadeIn 0.4s ease; }
+        .form-success h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--green-3); margin-bottom: 6px; }
+        .form-success .success-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+        .form-success .success-actions a { text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+        .modal-message { margin-top: 12px; font-size: 0.82rem; color: #b5523b; min-height: 1em; }
+        .modal-message.ok { color: var(--green-3); }
+        .booking-success { display: none; margin-top: 16px; text-align: left; font-size: 0.85rem; color: #4a6360; line-height: 1.7; }
+        .booking-success.show { display: block; }
+        .booking-success a { text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 12px; }
+        .modal-content { max-height: calc(100vh - 40px); overflow-y: auto; }
+
         @media (max-width: 900px) {
+        header { position: relative; }
+        #letsTalk, #packages, #contact, .featured-destinations { scroll-margin-top: 16px; }
         .header-flex { flex-direction: column; text-align: center; }
         .logo { flex-direction: column; text-align: center; justify-content: center; }
         .brand-acronym { justify-content: center; }
@@ -897,10 +917,10 @@
         </div>
         <nav>
             <ul>
-                <li><a id="navHome">Home</a></li>
-                <li><a id="navPackages">Tour Packages</a></li>
-                <li><a id="navAbout">About</a></li>
-                <li><a id="navContact">Contact</a></li>
+                <li><a id="navHome" href="#home">Home</a></li>
+                <li><a id="navPackages" href="#packages">Tour Packages</a></li>
+                <li><a id="navAbout" href="#about">About</a></li>
+                <li><a id="navContact" href="#contact">Contact</a></li>
             </ul>
         </nav>
         <div id="authWidget" class="auth-buttons"><a class="btn-primary header-cta" href="#letsTalk">Let's Talk</a></div>
@@ -921,7 +941,6 @@
         </div>
         <div class="container hero-grid">
             <div class="hero-text"><h2>Discover the<br><span>Philippines</span></h2><p>From powder-white sands to ancient rice terraces — KMM Travel Co. brings you authentic Filipino adventures.</p><button class="btn-primary" id="explorePackagesBtn">Explore Packages</button></div>
-            <div class="hero-img"><img src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=800&q=80" alt="Philippines beach" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22420%22%3E%3Crect fill=%22%23e8dfd5%22 width=%22800%22 height=%22420%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2224%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3EPhilippines Beach%3C/text%3E%3C/svg%3E'"></div>
         </div>
     </section>
 
@@ -1027,6 +1046,7 @@
 
                         <button type="submit" class="inquiry-submit">Send My Travel Plan Request</button>
                         <p class="form-note">We only curate Philippine travel experiences for this form.</p>
+                        <div class="form-success" id="inquirySuccess" role="status" aria-live="polite"></div>
                     </div>
 
                     <div class="inquiry-summary">
@@ -1048,7 +1068,7 @@
                                     <input class="input-field" type="text" name="firstName" placeholder="First name" required>
                                     <input class="input-field" type="text" name="lastName" placeholder="Last name" required>
                                     <input class="input-field" type="email" name="email" placeholder="Email address" required>
-                                    <input class="input-field" type="tel" name="phone" placeholder="Phone number" required>
+                                    <input class="input-field" type="tel" name="phone" placeholder="Phone number" pattern="[0-9\s+\-\(\)]{7,20}" title="Please enter a valid phone number (digits, spaces, +, -)" required>
                                 </div>
                             </div>
 
@@ -1096,7 +1116,7 @@
             <div class="destination-highlights-grid">
                 <article class="destination-highlight-card">
                     <div class="destination-image">
-                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="Boracay beach" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22380%22%3E%3Crect fill=%22%23e8dfd5%22 width=%22800%22 height=%22380%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2222%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3EBoracay%3C/text%3E%3C/svg%3E';">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" loading="lazy" alt="Boracay beach" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22380%22%3E%3Crect fill=%22%23e8dfd5%22 width=%22800%22 height=%22380%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2222%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3EBoracay%3C/text%3E%3C/svg%3E';">
                         <span class="destination-badge">Beach Luxury</span>
                     </div>
                     <div class="destination-copy">
@@ -1108,7 +1128,7 @@
 
                 <article class="destination-highlight-card">
                     <div class="destination-image">
-                        <img src="https://images.unsplash.com/photo-1573790387438-4da905039392?w=800&q=80" alt="Palawan lagoon" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22380%22%3E%3Crect fill=%22%23dfe8d5%22 width=%22800%22 height=%22380%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2222%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3EPalawan%3C/text%3E%3C/svg%3E';">
+                        <img src="https://images.unsplash.com/photo-1573790387438-4da905039392?w=800&q=80" loading="lazy" alt="Palawan lagoon" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22380%22%3E%3Crect fill=%22%23dfe8d5%22 width=%22800%22 height=%22380%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2222%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3EPalawan%3C/text%3E%3C/svg%3E';">
                         <span class="destination-badge">Signature Tour</span>
                     </div>
                     <div class="destination-copy">
@@ -1120,7 +1140,7 @@
 
                 <article class="destination-highlight-card">
                     <div class="destination-image">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" alt="Baguio city view" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22380%22%3E%3Crect fill=%22%23e8e2d5%22 width=%22800%22 height=%22380%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2222%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3EBaguio%3C/text%3E%3C/svg%3E';">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" loading="lazy" alt="Baguio city view" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22380%22%3E%3Crect fill=%22%23e8e2d5%22 width=%22800%22 height=%22380%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2222%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3EBaguio%3C/text%3E%3C/svg%3E';">
                         <span class="destination-badge">Cool Climate</span>
                     </div>
                     <div class="destination-copy">
@@ -1132,7 +1152,7 @@
 
                 <article class="destination-highlight-card">
                     <div class="destination-image">
-                        <img src="https://images.unsplash.com/photo-1509233725247-49e657c54213?w=800&q=80" alt="Siargao surf spot" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22380%22%3E%3Crect fill=%22%23d5e8df%22 width=%22800%22 height=%22380%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2222%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3ESiargao%3C/text%3E%3C/svg%3E';">
+                        <img src="https://images.unsplash.com/photo-1509233725247-49e657c54213?w=800&q=80" loading="lazy" alt="Siargao surf spot" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22380%22%3E%3Crect fill=%22%23d5e8df%22 width=%22800%22 height=%22380%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2222%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3ESiargao%3C/text%3E%3C/svg%3E';">
                         <span class="destination-badge">Island Energy</span>
                     </div>
                     <div class="destination-copy">
@@ -1177,7 +1197,7 @@
                     <h3>Want a custom trip plan?</h3>
                     <p>Send a quick inquiry and KMM can help you shape the right destination, schedule, and budget.</p>
                 </div>
-                <a href="#contact" class="btn-primary trip-cta-btn">Start an Inquiry</a>
+                <a href="#letsTalk" class="btn-primary trip-cta-btn">Start an Inquiry</a>
             </div>
         </section>
     </main>
@@ -1192,10 +1212,10 @@
         </div>
         
         <div class="about-grid">
-            <div class="about-image-card"><img src="https://i.ibb.co/Hp9F6ZDR/123.jpg" alt="Travel experience" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22280%22%3E%3Crect fill=%22%23e8dfd5%22 width=%22600%22 height=%22280%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3EExploring Paradise%3C/text%3E%3C/svg%3E';"><div class="caption">Exploring Paradise</div></div>
-            <div class="about-image-card"><img src="https://i.ibb.co/dJbHSskm/1234.jpg" alt="Cultural immersion" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22280%22%3E%3Crect fill=%22%23dfe8d5%22 width=%22600%22 height=%22280%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3ECultural Connections%3C/text%3E%3C/svg%3E';"><div class="caption">Cultural Connections</div></div>
-            <div class="about-image-card"><img src="https://i.ibb.co/VcPvfZb1/12345.jpg" alt="Adventure moments" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22280%22%3E%3Crect fill=%22%23e8d5df%22 width=%22600%22 height=%22280%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3EAdventure Awaits%3C/text%3E%3C/svg%3E';"><div class="caption">Adventure Awaits</div></div>
-            <div class="about-image-card"><img src="https://i.ibb.co/spZD0YWj/123456.jpg" alt="Local experiences" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22280%22%3E%3Crect fill=%22%23d5e8df%22 width=%22600%22 height=%22280%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3ELocal Experiences%3C/text%3E%3C/svg%3E';"><div class="caption">Local Experiences</div></div>
+            <div class="about-image-card"><img src="images/about-exploring-paradise.jpg" loading="lazy" alt="Travel experience" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22280%22%3E%3Crect fill=%22%23e8dfd5%22 width=%22600%22 height=%22280%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3EExploring Paradise%3C/text%3E%3C/svg%3E';"><div class="caption">Exploring Paradise</div></div>
+            <div class="about-image-card"><img src="images/about-cultural-connections.jpg" loading="lazy" alt="Cultural immersion" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22280%22%3E%3Crect fill=%22%23dfe8d5%22 width=%22600%22 height=%22280%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3ECultural Connections%3C/text%3E%3C/svg%3E';"><div class="caption">Cultural Connections</div></div>
+            <div class="about-image-card"><img src="images/about-adventure-awaits.jpg" loading="lazy" alt="Adventure moments" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22280%22%3E%3Crect fill=%22%23e8d5df%22 width=%22600%22 height=%22280%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3EAdventure Awaits%3C/text%3E%3C/svg%3E';"><div class="caption">Adventure Awaits</div></div>
+            <div class="about-image-card"><img src="images/about-local-experiences.jpg" loading="lazy" alt="Local experiences" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22280%22%3E%3Crect fill=%22%23d5e8df%22 width=%22600%22 height=%22280%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23666%22 text-anchor=%22middle%22 dy=%22.3em%22%3ELocal Experiences%3C/text%3E%3C/svg%3E';"><div class="caption">Local Experiences</div></div>
         </div>
         
         <div class="about-text">
@@ -1237,8 +1257,8 @@
 </div>
 
 <!-- Modals -->
-<div id="authModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeAuthModal">&times;</span><h3 id="modalTitle">Welcome Back</h3><p class="modal-subtitle" id="modalSubtitle">Sign in to book your next adventure</p><div id="signupFields" style="display:none;"><input type="text" id="signupName" class="modal-input" placeholder="Full Name"></div><input type="email" id="authEmail" class="modal-input" placeholder="Email Address"><input type="password" id="authPassword" class="modal-input" placeholder="Password"><button id="authActionBtn" class="modal-btn">Log In</button><p class="modal-message" id="modalMessage"></p><div class="switch-auth"><span id="toggleAuthMode"></span></div></div></div>
-<div id="bookingModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeBookingModal">&times;</span><h3>Confirm Booking</h3><div class="booking-details"><h4 id="bookingPackageName">Package</h4><p><span>Duration (nights)</span><span id="bookingDurationDisplay">-</span></p><p><span>Travelers</span><span id="bookingTravelers">1</span></p><p><span>Base Price</span><span id="bookingBasePrice">₱0</span></p><p><span>Discount</span><span id="bookingDiscount">₱0</span></p><p class="total"><span>Final Total</span><span id="bookingTotal">₱0</span></p></div><select id="travelerCount" class="modal-input"><option value="1">1 Adult</option><option value="2">2 Adults</option><option value="3">3 Adults</option><option value="4">4 Adults</option><option value="5">5 Adults</option></select><input type="date" id="travelDate" class="modal-input"><button id="confirmBookingBtn" class="modal-btn">Confirm Booking</button><p id="bookingMessage" class="modal-message"></p></div></div>
+<div id="authModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeAuthModal" role="button" tabindex="0" aria-label="Close">&times;</span><h3 id="modalTitle">Welcome Back</h3><p class="modal-subtitle" id="modalSubtitle">Sign in to book your next adventure</p><form id="authForm" novalidate><div id="signupFields" style="display:none;"><input type="text" id="signupName" class="modal-input" placeholder="Full Name" autocomplete="name"></div><input type="email" id="authEmail" class="modal-input" placeholder="Email Address" autocomplete="email"><input type="password" id="authPassword" class="modal-input" placeholder="Password" autocomplete="current-password"><button type="submit" id="authActionBtn" class="modal-btn">Log In</button></form><p class="modal-message" id="modalMessage"></p><div class="switch-auth"><span id="toggleAuthMode"></span></div></div></div>
+<div id="bookingModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeBookingModal" role="button" tabindex="0" aria-label="Close">&times;</span><h3>Confirm Booking</h3><div class="booking-details"><h4 id="bookingPackageName">Package</h4><p><span>Duration (nights)</span><span id="bookingDurationDisplay">-</span></p><p><span>Travelers</span><span id="bookingTravelers">1</span></p><p><span>Base Price</span><span id="bookingBasePrice">₱0</span></p><p><span>Discount</span><span id="bookingDiscount">₱0</span></p><p class="total"><span>Final Total</span><span id="bookingTotal">₱0</span></p></div><select id="travelerCount" class="modal-input"><option value="1">1 Adult</option><option value="2">2 Adults</option><option value="3">3 Adults</option><option value="4">4 Adults</option><option value="5">5 Adults</option></select><input type="date" id="travelDate" class="modal-input"><button id="confirmBookingBtn" class="modal-btn">Confirm Booking</button><p id="bookingMessage" class="modal-message"></p><div id="bookingSuccess" class="booking-success" role="status" aria-live="polite"></div></div></div>
 <div id="toastMsg" class="toast-msg"></div>
 
 <footer id="contact">
@@ -1318,7 +1338,7 @@ function renderPackages() {
             <div class="card-img-wrapper">${pkg.badge ? `<span class="card-badge">${pkg.badge}</span>` : ''}<img class="card-img" src="${pkg.img}" alt="${pkg.name}" loading="lazy" onerror="this.src='${placeholderSvg}'"></div>
             <div class="card-content">
                 <h3>${pkg.name}</h3>
-                <div class="package-meta"><span><i class="fas fa-calendar"></i> ${pkg.defaultDuration} Days, ${pkg.defaultDuration-1} Nights (default)</span></div>
+                <div class="package-meta"><span><i class="fas fa-calendar"></i> <span class="trip-length">${currentDur + 1} Days, ${currentDur} Nights</span></span></div>
                 <p class="package-desc">${pkg.desc}</p>
                 <div class="price-row">
                     <div class="price">₱${pkg.basePrice.toLocaleString()} <small>/ person</small></div>
@@ -1328,23 +1348,57 @@ function renderPackages() {
             </div>
         </div>`;
     }).join('');
-    document.querySelectorAll('.duration-input').forEach(inp => inp.addEventListener('change', (e) => { const pkgName = e.target.dataset.name; packageDurations[pkgName] = Math.min(14, Math.max(1, parseInt(e.target.value)||1)); renderPackages(); }));
+    document.querySelectorAll('.duration-input').forEach(inp => inp.addEventListener('change', (e) => {
+        const pkgName = e.target.dataset.name;
+        const nights = Math.min(14, Math.max(1, parseInt(e.target.value) || 1));
+        packageDurations[pkgName] = nights;
+        e.target.value = nights;
+        const lengthLabel = e.target.closest('.package-card')?.querySelector('.trip-length');
+        if (lengthLabel) lengthLabel.textContent = `${nights + 1} Days, ${nights} Nights`;
+    }));
     document.querySelectorAll('.book-now').forEach(btn => btn.addEventListener('click', (e) => { const name = btn.dataset.name; const price = parseFloat(btn.dataset.price); const duration = packageDurations[name] || packagesData.find(p=>p.name===name)?.defaultDuration||3; openBookingModal({ name, price, duration, defaultDuration: packagesData.find(p=>p.name===name)?.defaultDuration||3 }); }));
     observeLuxuryMotion();
 }
 
 function performSearch() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    const filtered = allDestinations.filter(d => d.name.toLowerCase().includes(query) || d.location.toLowerCase().includes(query));
+    const raw = document.getElementById('searchInput').value.trim().toLowerCase();
+    const query = raw.replace(/\bmt\.?\s*/g, 'mount ').replace(/\s+/g, ' ');
+    const filtered = allDestinations.filter(d => [d.name, d.location, d.category, d.desc].some(v => v.toLowerCase().includes(query)));
     const resultsDiv = document.getElementById('searchResults');
-    if(filtered.length === 0) { resultsDiv.innerHTML = '<p>No results found.</p>'; return; }
-    resultsDiv.innerHTML = filtered.map(d => `<div class="search-card"><h4><i class="fas fa-map-marker-alt"></i> ${d.name}</h4><p>📍 ${d.location} | ${d.category}</p><p>${d.desc}</p><p class="price-tag">₱${d.price.toLocaleString()} per person (3D2N package)</p><button class="explore-btn" data-name="${d.name}">Inquire Now →</button></div>`).join('');
-    document.querySelectorAll('.explore-btn').forEach(btn => btn.addEventListener('click', () => { showToast(`📧 Request info for ${btn.dataset.name} - email us at kmm.knowmemore@gmail.com`); }));
+    if(filtered.length === 0) { resultsDiv.innerHTML = '<p style="color:#6d837d;">No matches yet. Try Boracay, Palawan or Bohol, or tell us where you want to go in the inquiry form below.</p>'; return; }
+    resultsDiv.innerHTML = filtered.map(d => `<div class="search-card"><h4><i class="fas fa-map-marker-alt"></i> ${d.name}</h4><p>📍 ${d.location} | ${d.category}</p><p>${d.desc}</p><p class="price-tag">₱${d.price.toLocaleString()} per person (3D2N package)</p><button class="explore-btn" data-name="${d.name}" data-location="${d.location}">Inquire Now →</button></div>`).join('');
+    document.querySelectorAll('.explore-btn').forEach(btn => btn.addEventListener('click', () => {
+        const destField = document.querySelector('#inquiryForm [name="destination"]');
+        if (destField) destField.value = `${btn.dataset.name}, ${btn.dataset.location}`;
+        navigateTo('letsTalk');
+        setTimeout(() => destField?.focus({ preventScroll: true }), 600);
+        showToast(`${btn.dataset.name} added to your inquiry. Fill in the details below and we'll curate it for you.`);
+    }));
 }
 
-function openBookingModal(pkg) { if (!currentUser) { showToast("Please login to book."); openAuthModal(true); return; } selectedPackage = pkg; document.getElementById('bookingPackageName').innerText = pkg.name; document.getElementById('bookingDurationDisplay').innerText = pkg.duration + " nights"; document.getElementById('travelerCount').value = '1'; updateBookingPricePreview(); document.getElementById('travelDate').value = ''; document.getElementById('bookingMessage').innerText = ''; document.getElementById('bookingModal').classList.add('active'); }
+let pendingBooking = null;
+function localISODate(offsetDays) { const d = new Date(); d.setDate(d.getDate() + offsetDays); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
+function openBookingModal(pkg) {
+    if (!currentUser) { pendingBooking = pkg; showToast("Please log in or create a free account to book."); openAuthModal(true); return; }
+    pendingBooking = null;
+    selectedPackage = pkg;
+    document.getElementById('bookingPackageName').innerText = pkg.name;
+    document.getElementById('bookingDurationDisplay').innerText = pkg.duration + " nights";
+    document.getElementById('travelerCount').value = '1';
+    const dateField = document.getElementById('travelDate');
+    dateField.value = '';
+    dateField.min = localISODate(1);
+    updateBookingPricePreview();
+    const msg = document.getElementById('bookingMessage');
+    msg.innerText = '';
+    msg.classList.remove('ok');
+    document.getElementById('bookingSuccess').classList.remove('show');
+    ['travelerCount', 'travelDate', 'confirmBookingBtn'].forEach(id => document.getElementById(id).style.display = '');
+    document.getElementById('bookingModal').classList.add('active');
+}
 function updateBookingPricePreview() { if(!selectedPackage) return; const travelers = parseInt(document.getElementById('travelerCount').value); const date = document.getElementById('travelDate').value; const { final, discount } = calculateDiscountedPrice(selectedPackage.price, travelers, selectedPackage.duration, date); document.getElementById('bookingTravelers').innerHTML = travelers; document.getElementById('bookingBasePrice').innerHTML = `₱${(selectedPackage.price * travelers).toLocaleString()}`; document.getElementById('bookingDiscount').innerHTML = `- ₱${Math.round(discount).toLocaleString()}`; document.getElementById('bookingTotal').innerHTML = `₱${Math.round(final).toLocaleString()}`; }
-function showToast(msg) { const t = document.getElementById('toastMsg'); t.innerText = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
+let toastTimer = null;
+function showToast(msg) { const t = document.getElementById('toastMsg'); t.innerText = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), Math.min(7000, Math.max(3000, msg.length * 50))); }
 function getCheckedValues(form, name) {
     return Array.from(form.querySelectorAll(`input[name="${name}"]:checked`)).map(input => input.value);
 }
@@ -1410,7 +1464,7 @@ function showWelcomePopup() {
     };
 
     const handleKeydown = (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') {
             e.preventDefault();
             closePopup();
         }
@@ -1435,25 +1489,73 @@ function loadUser() { try { const u = sessionStorage.getItem('kmmsession'); curr
 function saveUser(u) { localStorage.setItem('kmmuser', JSON.stringify(u)); }
 function startSession(u) { sessionStorage.setItem('kmmsession', JSON.stringify(u)); currentUser = u; }
 function clearUser() { sessionStorage.removeItem('kmmsession'); currentUser = null; }
-function openAuthModal(login) { isLoginMode = login; document.getElementById('modalTitle').innerText = login ? "Welcome Back" : "Create Account"; document.getElementById('modalSubtitle').innerText = login ? "Sign in to book your next adventure" : "Join us for exclusive deals"; document.getElementById('signupFields').style.display = login ? "none" : "block"; document.getElementById('authActionBtn').innerText = login ? "Log In" : "Sign Up"; document.getElementById('toggleAuthMode').innerText = login ? "Don't have an account? Sign up" : "Already have an account? Log in"; document.getElementById('authModal').classList.add('active'); }
+function openAuthModal(login) { isLoginMode = login; document.getElementById('modalMessage').innerText = ''; document.getElementById('authPassword').setAttribute('autocomplete', login ? 'current-password' : 'new-password'); document.getElementById('modalTitle').innerText = login ? "Welcome Back" : "Create Account"; document.getElementById('modalSubtitle').innerText = login ? "Sign in to book your next adventure" : "Join us for exclusive deals"; document.getElementById('signupFields').style.display = login ? "none" : "block"; document.getElementById('authActionBtn').innerText = login ? "Log In" : "Sign Up"; document.getElementById('toggleAuthMode').innerText = login ? "Don't have an account? Sign up" : "Already have an account? Log in"; document.getElementById('authModal').classList.add('active'); }
 function closeAuthModal() { document.getElementById('authModal').classList.remove('active'); }
-function handleAuth() { const email = document.getElementById('authEmail').value.trim().toLowerCase(); const pwd = document.getElementById('authPassword').value.trim(); const name = document.getElementById('signupName')?.value.trim(); if(!email || !pwd) { document.getElementById('modalMessage').innerText = "Please fill all fields"; return; } if(isLoginMode){ const stored = localStorage.getItem('kmmuser'); if(stored) { const u = JSON.parse(stored); if(u.email === email && u.password === pwd) { startSession(u); closeAuthModal(); updateAuthWidget(); showToast(`Welcome back ${u.name}`); renderPackages(); return; } } document.getElementById('modalMessage').innerText = "Invalid email or password"; } else { if(!name) { document.getElementById('modalMessage').innerText = "Please enter your name"; return; } if(pwd.length < 4) { document.getElementById('modalMessage').innerText = "Password must be at least 4 characters"; return; } const newUser = { email, password: pwd, name }; saveUser(newUser); startSession(newUser); closeAuthModal(); updateAuthWidget(); showToast(`Welcome ${name}!`); renderPackages(); } }
+function afterAuth() { closeAuthModal(); updateAuthWidget(); renderPackages(); if (pendingBooking) { const pkg = pendingBooking; pendingBooking = null; setTimeout(() => openBookingModal(pkg), 250); } }
+function handleAuth() { const email = document.getElementById('authEmail').value.trim().toLowerCase(); const pwd = document.getElementById('authPassword').value.trim(); const name = document.getElementById('signupName')?.value.trim(); if(!email || !pwd) { document.getElementById('modalMessage').innerText = "Please enter your email and password"; return; } if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('modalMessage').innerText = "Please enter a valid email address"; return; } if(isLoginMode){ const stored = localStorage.getItem('kmmuser'); if(stored) { const u = JSON.parse(stored); if(u.email === email && u.password === pwd) { startSession(u); showToast(`Welcome back, ${u.name}!`); afterAuth(); return; } } document.getElementById('modalMessage').innerText = stored ? "Invalid email or password" : "No account found on this device yet. Please sign up first."; } else { if(!name) { document.getElementById('modalMessage').innerText = "Please enter your name"; return; } if(pwd.length < 4) { document.getElementById('modalMessage').innerText = "Password must be at least 4 characters"; return; } const newUser = { email, password: pwd, name }; saveUser(newUser); startSession(newUser); showToast(`Welcome, ${name}! Your account is ready.`); afterAuth(); } }
 
-document.getElementById('navHome').addEventListener('click', () => { document.getElementById('homeContent').style.display = 'block'; document.getElementById('aboutContent').classList.remove('active'); window.scrollTo({top:0,behavior:'smooth'}); });
-document.getElementById('navPackages').addEventListener('click', () => { document.getElementById('homeContent').style.display = 'block'; document.getElementById('aboutContent').classList.remove('active'); document.getElementById('packages').scrollIntoView({behavior:'smooth'}); });
-document.getElementById('navAbout').addEventListener('click', () => { document.getElementById('homeContent').style.display = 'none'; document.getElementById('aboutContent').classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); });
-document.getElementById('navContact').addEventListener('click', () => { document.getElementById('contact').scrollIntoView({behavior:'smooth'}); if(document.getElementById('homeContent').style.display === 'none') { document.getElementById('homeContent').style.display = 'block'; document.getElementById('aboutContent').classList.remove('active'); } });
+function setActiveNav(id) { document.querySelectorAll('nav ul li a').forEach(a => a.classList.toggle('active', a.id === id)); }
+function showHome() { document.getElementById('homeContent').style.display = 'block'; document.getElementById('aboutContent').classList.remove('active'); setActiveNav(''); }
+function showAbout() { document.getElementById('homeContent').style.display = 'none'; document.getElementById('aboutContent').classList.add('active'); setActiveNav('navAbout'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+function navigateTo(id) {
+    if (id === 'about') { showAbout(); return; }
+    showHome();
+    if (id === 'home') { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    const target = document.getElementById(id);
+    if (!target) return;
+    requestAnimationFrame(() => {
+        // Ignore the reveal animation's temporary translateY so we land exactly on the section
+        const style = getComputedStyle(target);
+        const shift = style.transform && style.transform !== 'none' ? new DOMMatrix(style.transform).m42 : 0;
+        const top = target.getBoundingClientRect().top + window.scrollY - shift - (parseFloat(style.scrollMarginTop) || 0);
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    });
+}
+// One router for every in-page link (nav, header CTA, cards, banners) so they also work from the About view
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const id = link.getAttribute('href').slice(1);
+    if (!id) return;
+    e.preventDefault();
+    navigateTo(id);
+});
 
 document.getElementById('searchBtn')?.addEventListener('click', performSearch);
 document.getElementById('searchInput')?.addEventListener('keypress', (e) => { if(e.key === 'Enter') performSearch(); });
-document.getElementById('explorePackagesBtn')?.addEventListener('click',()=>document.getElementById('packages').scrollIntoView({behavior:'smooth'}));
-document.getElementById('closeAuthModal')?.addEventListener('click',closeAuthModal);
-document.getElementById('authActionBtn')?.addEventListener('click',handleAuth);
+document.getElementById('explorePackagesBtn')?.addEventListener('click',()=>navigateTo('packages'));
+document.getElementById('closeAuthModal')?.addEventListener('click',()=>{ pendingBooking = null; closeAuthModal(); });
+document.getElementById('authForm')?.addEventListener('submit',(e)=>{ e.preventDefault(); handleAuth(); });
 document.getElementById('toggleAuthMode')?.addEventListener('click',()=>{ isLoginMode = !isLoginMode; openAuthModal(isLoginMode); });
 document.getElementById('closeBookingModal')?.addEventListener('click',()=>document.getElementById('bookingModal').classList.remove('active'));
+// Close modals by clicking the backdrop, pressing Escape, or using the keyboard on the close icon
+['authModal', 'bookingModal'].forEach(id => document.getElementById(id)?.addEventListener('click', (e) => { if (e.target.id === id) { e.currentTarget.classList.remove('active'); if (id === 'authModal') pendingBooking = null; } }));
+document.querySelectorAll('.close-modal').forEach(btn => btn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); } }));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { ['authModal', 'bookingModal'].forEach(id => document.getElementById(id)?.classList.remove('active')); pendingBooking = null; } });
 document.getElementById('travelerCount')?.addEventListener('change',updateBookingPricePreview);
 document.getElementById('travelDate')?.addEventListener('change',updateBookingPricePreview);
-document.getElementById('confirmBookingBtn')?.addEventListener('click',()=>{ if(!selectedPackage) return; const date = document.getElementById('travelDate').value; if(!date) { document.getElementById('bookingMessage').innerText = "Select travel date"; return; } const travelers = parseInt(document.getElementById('travelerCount').value); const { final } = calculateDiscountedPrice(selectedPackage.price, travelers, selectedPackage.duration, date); showToast(`✅ Booked ${selectedPackage.name} for ${travelers} pax on ${date}. Total ₱${Math.round(final)}. We'll email you.`); document.getElementById('bookingModal').classList.remove('active'); });
+document.getElementById('confirmBookingBtn')?.addEventListener('click',()=>{
+    if(!selectedPackage) return;
+    const msg = document.getElementById('bookingMessage');
+    msg.classList.remove('ok');
+    const date = document.getElementById('travelDate').value;
+    if(!date) { msg.innerText = "Please select your travel date."; return; }
+    if(date < localISODate(1)) { msg.innerText = "Please choose a travel date from tomorrow onwards."; return; }
+    const travelers = parseInt(document.getElementById('travelerCount').value);
+    const { final } = calculateDiscountedPrice(selectedPackage.price, travelers, selectedPackage.duration, date);
+    const total = `₱${Math.round(final).toLocaleString()}`;
+    const niceDate = new Date(date + 'T00:00:00').toLocaleDateString('en-PH', { year: 'numeric', month: 'long', day: 'numeric' });
+    const ref = 'KMM-' + Date.now().toString(36).toUpperCase().slice(-6);
+    const body = `Hi KMM Travel Co.,\n\nI'd like to confirm this booking request:\n\nReference: ${ref}\nPackage: ${selectedPackage.name}\nStay: ${selectedPackage.duration} nights\nTravelers: ${travelers}\nTravel date: ${niceDate}\nQuoted total: ${total}\n\nName: ${currentUser?.name || ''}\nEmail: ${currentUser?.email || ''}\n\nThank you!`;
+    const mailto = `mailto:kmm.knowmemore@gmail.com?subject=${encodeURIComponent(`Booking request ${ref} - ${selectedPackage.name}`)}&body=${encodeURIComponent(body)}`;
+    msg.innerText = `Booking request received! Reference ${ref}.`;
+    msg.classList.add('ok');
+    ['travelerCount', 'travelDate', 'confirmBookingBtn'].forEach(id => document.getElementById(id).style.display = 'none');
+    const success = document.getElementById('bookingSuccess');
+    success.innerHTML = `<strong>${selectedPackage.name}</strong> for ${travelers} traveler${travelers > 1 ? 's' : ''} on ${niceDate}, total <strong>${total}</strong>. A KMM travel specialist will email you within 24 hours to finalize payment and details.<a class="modal-btn" href="${mailto}"><i class="fas fa-envelope"></i> Email this booking to KMM</a>`;
+    success.classList.add('show');
+    showToast(`✅ Booking request ${ref} sent for ${selectedPackage.name}.`);
+});
 document.getElementById('inquiryForm')?.addEventListener('submit', (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -1465,7 +1567,31 @@ document.getElementById('inquiryForm')?.addEventListener('submit', (event) => {
     const dining = getCheckedValues(form, 'dining');
     const budget = (data.get('budget') || '').toString().trim();
     const summary = `${firstName || 'There'} - ${destination} | ${data.get('groupType')} | ${data.get('stay')} | ${travelDate} | ${budget}`;
-    showToast(`Thanks ${firstName || 'there'}! KMM received your Philippines travel request for ${destination}. We'll send a curated plan soon.`);
+    const email = (data.get('email') || '').toString().trim();
+    const lines = [
+        `Destination: ${destination}`,
+        `Travelers: ${data.get('travelers')} (${data.get('groupType')})`,
+        `Travel date: ${travelDate}`,
+        `Budget per person: ${budget}`,
+        `Stay: ${data.get('stay')}`,
+        `Experiences: ${experiences.join(', ') || '-'}`,
+        `Transport: ${data.get('transport')}`,
+        `Dining: ${dining.join(', ') || '-'}`,
+        `Notes: ${(data.get('notes') || '').toString().trim() || '-'}`,
+        '',
+        `Name: ${firstName} ${(data.get('lastName') || '').toString().trim()}`,
+        `Email: ${email}`,
+        `Phone: ${data.get('phone')}`,
+        `Heard about KMM via: ${data.get('source')}`,
+        `Weekly newsletter: ${data.get('newsletter') === 'Yes' ? 'Yes' : 'No'}`
+    ];
+    const mailto = `mailto:kmm.knowmemore@gmail.com?subject=${encodeURIComponent(`Travel plan request - ${destination}`)}&body=${encodeURIComponent('Hi KMM Travel Co.,\n\nHere is my travel plan request:\n\n' + lines.join('\n'))}`;
+    const safe = (v) => v.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const success = document.getElementById('inquirySuccess');
+    success.innerHTML = `<h4><i class="fas fa-circle-check"></i> Thank you, ${safe(firstName || 'traveler')}!</h4><p>We received your request for <strong>${safe(destination)}</strong>. A KMM travel specialist will reply to <strong>${safe(email)}</strong> with a curated plan within 24 hours.</p><div class="success-actions"><a class="btn-primary" href="${mailto}"><i class="fas fa-envelope"></i> Also send it by email</a><a class="btn-outline" style="color: var(--green-3);" href="tel:+639614426785"><i class="fas fa-phone-alt"></i> Call +63 961 442 6785</a></div>`;
+    success.classList.add('show');
+    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    showToast(`Thanks ${firstName || 'there'}! Your Philippines travel request for ${destination} was received.`);
     form.reset();
     console.log('KMM Inquiry', {
         destination,
@@ -1490,6 +1616,7 @@ document.getElementById('inquiryForm')?.addEventListener('submit', (event) => {
 
 loadUser(); 
 showWelcomePopup();
+document.querySelector('#inquiryForm [name="travelDate"]')?.setAttribute('min', localISODate(1));
 updateAuthWidget(); 
 renderPackages();
 observeLuxuryMotion();
